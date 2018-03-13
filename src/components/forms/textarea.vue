@@ -5,8 +5,8 @@
       type="textarea"
       :autosize="{ minRows: 3}"
       placeholder="请输入内容"
-      v-model="value"
-
+      :value="text"
+      @input='changeText'
       >
     </el-input>
   </div>
@@ -14,25 +14,26 @@
 <div style="margin: 20px 0;"></div>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       title:'段落：',
-      // value: '',
     }
   },
-  computed:{
-    value:{
-      get () {
-        return this.$store.state.paragraph.value[0]
-      },
-      set (value) {
-        this.$store.commit('changeValue', {value})
-      }
-    }
+  computed:{...mapState({
+    selectedCompIndex:'selectedCompIndex',
+  }),
+  text(){
+      return this.$store.state.myPageComps[this.selectedCompIndex]['data']['text'];
+   }
+},
 
-  },
+
   methods:{
+    changeText(value){
+      this.$store.commit('changeValue', {key:'text',value:value})
+    }
 
   }
 }

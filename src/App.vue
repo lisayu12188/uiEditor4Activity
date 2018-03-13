@@ -85,7 +85,7 @@
     <div class="middle ">
 
       <el-button-group>
-        <el-button type="primary" icon="el-icon-refresh" @click='redo'>恢复</el-button>
+        <el-button type="primary" icon="el-icon-refresh" >恢复</el-button>
         <el-button type="primary" icon="el-icon-remove">撤销</el-button>
         <el-button type="primary" icon="el-icon-upload">保存</el-button>
         <el-button type="primary" icon="el-icon-mobile-phone">预览</el-button>
@@ -138,104 +138,29 @@ import textareaForm from './components/forms/textarea'
 import uploadImg from './components/forms/uploadImg'
 import fontSet from './components/forms/fontSet'
 import commonForms from './components/forms/commonForms'
+import { mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 
-const allForms = [
-  {
-    type: 'inputForm',
-    name: 'inputForm',
-    title: '输入框',
-    options: [{
-      lable: '',
-      value: ''
-    }]
-  },
-  {
-    type: 'textarea',
-    name: 'textareaForm',
-    title: '文本框',
-    options: [{
-      lable: '',
-      value: ''
-    }]
-  },
-  {
-    type: 'commonForms',
-    name: 'commonForms',
-    title: '文本样式',
-    options: [{
-      lable: '',
-      value: ''
-    }]
-  },
-
-  {
-    type: 'uploadImg',
-    name: 'headerBannerImg1',
-    title: '上传图片',
-    options: [{
-      lable: '',
-      value: ''
-    }]
-  },
-]
-const allComponents = [
-  {
-    name: 'headerBannerImg1',
-    forms: ['uploadImg']
-
-  },
-
-
-  {
-    name: 'whiteFooter',
-    forms: ['uploadImg']
-  },
-  {
-    name: 'blackFooter',
-    forms: ['uploadImg']
-  },
-  {
-    name: 'paragraph1',
-    forms: ['textareaForm', 'fontSet','commonForms']
-  },
-  {
-    name: 'title1',
-    forms: ['inputForm', 'fontSet','commonForms']
-  },
-  {
-    name: 'picTitle',
-    forms: ['uploadImg','commonForms']
-  },
-
-
-]
 
 export default {
   name: 'App',
   data() {
     return {
-      mymodule: 'pageSet',
-      selectedCompIndex: 0,
-      allComponents: allComponents,
-      allForms: allForms,
-      myPageComps: [ //选择的组件
-        {
-          name: 'headerBannerImg1'
-        }
-      ],
 
-      forms: [
-        'uploadImg'
-      ]
 
 
 
 
     }
   },
-  computed:{
-
-  },
+  computed:mapState([
+    'mymodule',
+    'selectedCompIndex',
+    'allComponents',
+    'allForms',
+    'myPageComps',
+    'forms'
+  ]),
 
   components: {
     pageSet,
@@ -260,7 +185,7 @@ export default {
     selectedCompIndex: {
       handler: function(idx) {
         if (idx >= 0) {
-          let name = this.myPageComps && this.myPageComps[idx].name;
+          let name = this.myPageComps.length!=0 && this.myPageComps[idx].name;
           this.updateForms(name)
         } else {
           this.forms = []
@@ -273,75 +198,16 @@ export default {
 
   },
   methods: {
-    getSelectedIndex(index) {
-      if (this.selectedCompIndex === index) {
-        this.selectedCompIndex = -1
-      } else {
-        this.selectedCompIndex = index
-      }
-
-    },
-
-    showModule(moduleName) {
-      this.mymodule = moduleName;
-      // this.isCurrent = moduleName
-    },
-
-    deleteThisComp(index) {
-      this.myPageComps.splice(index, 1)
-      this.selectedCompIndex = -1
-    },
-    moveTop(index) {
-      if (index > 0) {
-        let comp = this.myPageComps.splice(index, 1);
-        this.myPageComps.splice(index - 1, 0, comp[0]);
-        this.selectedCompIndex--
-      }
-    },
-    moveDown(index) {
-      if (index >= 0) {
-        let comp = this.myPageComps.splice(index, 1);
-        this.myPageComps.splice(index + 1, 0, comp[0]);
-        this.selectedCompIndex++
-      }
-
-    },
-    moveToFirst(index) {
-      if (index > 0) {
-        let comp = this.myPageComps.splice(index, 1);
-        this.myPageComps.splice(0, 0, comp[0]);
-        this.selectedCompIndex = 0
-
-      }
-    },
-
-
-    redo() {},
-
-    addComp(compName) {
-      const selected = {
-        name: compName
-      };
-      const len = this.myPageComps.length;
-      if (this.selectedCompIndex < 0 || this.selectedCompIndex === len - 1) { //添加到最后
-        this.myPageComps.push(selected);
-        this.selectedCompIndex = this.myPageComps.length - 1
-
-
-
-
-      } else { //插入到中间
-        this.myPageComps.splice(this.selectedCompIndex, 0, selected);
-        this.updateForms(compName)
-
-      }
-
-    },
-    updateForms(compName) {
-      const currentComp = this.allComponents.find(val => val.name === compName)
-      this.forms = currentComp.forms
-    }
-
+    ...mapMutations([
+      'getSelectedIndex',
+      'deleteThisComp',
+      'showModule',
+      'moveTop',
+      'moveDown',
+      'moveToFirst',
+      'addComp',
+      'updateForms'
+    ]),
 
 
 

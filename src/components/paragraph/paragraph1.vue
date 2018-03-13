@@ -1,46 +1,58 @@
 <template>
   <p class="p-text"
   :style="{
-    color: color,
-    fontSize: fontSize + 'rem',
-    lineHeight:lineHeight+'rem',
-    paddingTop: paddingTop+'rem',
-    paddingBottom: paddingTop+'rem',
-    paddingLeft: paddingLeft+'rem',
-    paddingRight: paddingRight+'rem',
+    color: myData.color,
+    fontSize: myData.fontSize + 'rem',
+    lineHeight:myData.lineHeight+'rem',
+    paddingTop: myData.padding.top+'rem',
+    paddingBottom: myData.padding.bottom+'rem',
+    paddingLeft: myData.padding.left+'rem',
+    paddingRight: myData.padding.right+'rem',
+    marginTop: myData.margin.top+'rem',
+    marginBottom: myData.margin.bottom+'rem',
+    marginLeft: myData.margin.left+'rem',
+    marginRight: myData.margin.right+'rem',
 
 
   }">
-    {{text}}
+    {{myData.text}}
   </p>
 </template>
 
 
 <script>
 import imgSrc from '../../assets/img/banner.jpg'
+import { mapState } from 'vuex'
 export default {
   name: 'paragraph1',
 
   data () {
     return {
       // text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。',
-      color:'#333',
-      fontSize:0.4800,//18px
-      lineHeight:0.8533,//32px
-      paddingTop:.2667,//20px
-      paddingBottom:0,
-      paddingLeft:.32,//24px
-      paddingRight:.32,
+      // color:'#333',
+      // fontSize:0.4800,//18px
+      // lineHeight:0.8533,//32px
+      // paddingTop:.2667,//20px
+      // paddingBottom:0,
+      // paddingLeft:.32,//24px
+      // paddingRight:.32,
     }
   },
   computed:{
-    text(){
-        let len = this.$store.state.paragraph.value.length
-        return this.$store.state.paragraph.value[len-1]
+    ...mapState({
+      selectedCompIndex:'selectedCompIndex',
+      myPageComps:'myPageComps',
+    }),
+    myData(){
+      return this.myPageComps[this.selectedCompIndex]['data'];
+    },
 
-    }
+
 
   },
+
+
+
 
   methods:{
 
