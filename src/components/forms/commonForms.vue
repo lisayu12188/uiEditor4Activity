@@ -1,9 +1,9 @@
 <template>
   <el-form ref="form" label-width="70px" label-position='left' size="small">
   <el-form-item label="排版：">
-    <el-radio-group :value="textPosition">
+    <el-radio-group v-model="textAlign">
       <el-radio-button label="left">左对齐</el-radio-button>
-      <el-radio-button label="middle">居中</el-radio-button>
+      <el-radio-button label="center">居中</el-radio-button>
       <el-radio-button label="right">右对齐</el-radio-button>
     </el-radio-group>
   </el-form-item>
@@ -46,12 +46,12 @@
   </el-form-item>
 
   <el-form-item label="背景：" >
-    <el-color-picker :value="background" @change="setColor"></el-color-picker>
+    <el-color-picker v-model="backgroundColor"></el-color-picker>
   </el-form-item>
 
   <el-form-item label="边框：" >
-    <el-input-number :value="border.width" controls-position="right" @change="setFontSize" size="mini" class="box-width num-box" :min="0"></el-input-number>
-    <el-select :value="border.value" clearable placeholder="请选择" size='mini' class="box-width num-box">
+    <el-input-number v-model="borderWidth" controls-position="right"  size="mini" class="box-width num-box" :min="0"></el-input-number>
+    <el-select v-model="borderStyle"  placeholder="请选择" size='mini' class="box-width num-box">
      <el-option
        v-for="type in borderTypes"
        :key="type.value"
@@ -60,7 +60,7 @@
      </el-option>
    </el-select>
 
-    <el-color-picker :value="border.color" @change="setColor"></el-color-picker>
+    <el-color-picker v-model="borderColor"></el-color-picker>
   </el-form-item>
 
 
@@ -74,27 +74,16 @@
 import { mapState } from 'vuex'
 const borderTypes = [
   {value:'none',label:'无'},
-  {value:'solid',label:'_____'},
+  {value:'solid',label:'———'},
   {value:'dashed',label:'-----'}
 ]
   export default {
     data() {
       return {
 
-        textPosition:'left',
+        // textAlign:'left',
         background:'',
-        // margin:{
-        //   top:20,
-        //   right:0,
-        //   down:0,
-        //   left:0
-        // },
-        // padding:{
-        //   top:0,
-        //   right:0,
-        //   down:30,
-        //   left:0
-        // },
+
         border:{
           width:'1',
           value:'none',
@@ -107,15 +96,62 @@ const borderTypes = [
     },
     computed:{...mapState({
       selectedCompIndex:'selectedCompIndex',
+      // textAlign: state => state.myPageComps[state.selectedCompIndex]['data']['textAlign'],
+      margin:state => state.myPageComps[state.selectedCompIndex]['data']['margin'],
+      padding:state => state.myPageComps[state.selectedCompIndex]['data']['padding'],
 
     }),
 
-    margin(){
-      return this.$store.state.myPageComps[this.selectedCompIndex]['data']['margin']
+    textAlign:{
+      get(){
+        return this.$store.state.myPageComps[this.selectedCompIndex]['data']['textAlign']
+      },
+      set(value){
+        this.$store.commit('changeValue',{key:'textAlign',value:value} )
+      }
+
     },
-    padding(){
-      return this.$store.state.myPageComps[this.selectedCompIndex]['data']['padding']
-    }
+    backgroundColor:{
+      get(){
+        return this.$store.state.myPageComps[this.selectedCompIndex]['data']['backgroundColor']
+      },
+      set(value){
+        this.$store.commit('changeValue',{key:'backgroundColor',value:value} )
+      }
+    },
+
+      borderWidth:{
+        get(){
+          return this.$store.state.myPageComps[this.selectedCompIndex]['data']['border']['width']
+        },
+        set(value){
+          this.$store.commit('changeStyle',{key:'border',subKey:'width',value:value} )
+        }
+      },
+
+      borderStyle:{
+        get(){
+          return this.$store.state.myPageComps[this.selectedCompIndex]['data']['border']['style']
+        },
+        set(value){
+          this.$store.commit('changeStyle',{key:'border',subKey:'style',value:value} )
+        }
+      },
+
+      borderColor:{
+        get(){
+          return this.$store.state.myPageComps[this.selectedCompIndex]['data']['border']['color']
+        },
+        set(value){
+          this.$store.commit('changeStyle',{key:'border',subKey:'color',value:value} )
+        }
+      },
+
+
+
+
+
+
 
 
 
@@ -147,13 +183,6 @@ const borderTypes = [
         this.$store.commit('changeStyle',{key:'padding',subKey:'right',value:value} )
       },
 
-
-      setFontSize(){
-
-      },
-      setColor(){
-
-      }
 
     }
   }

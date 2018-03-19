@@ -1,9 +1,14 @@
 <template>
   <p class="p-text"
   :style="{
-    color: myData.color,
-    fontSize: myData.fontSize + 'rem',
-    lineHeight:myData.lineHeight+'rem',
+    color: myData.font.color,
+    fontSize: myData.font.fontSize + 'rem',
+    lineHeight:myData.font.lineHeight+'rem',
+    
+    fontWeight:myData.font.weight,
+    textDecoration:myData.font.textDecoration,
+    fontStyle:myData.font.fontStyle,
+
     paddingTop: myData.padding.top+'rem',
     paddingBottom: myData.padding.bottom+'rem',
     paddingLeft: myData.padding.left+'rem',
@@ -12,6 +17,10 @@
     marginBottom: myData.margin.bottom+'rem',
     marginLeft: myData.margin.left+'rem',
     marginRight: myData.margin.right+'rem',
+
+    textAlign:myData.textAlign,
+    backgroundColor: myData.backgroundColor,
+    border:myData.border.width+'px '+myData.border.style +' '+myData.border.color
 
 
   }">
@@ -28,14 +37,6 @@ export default {
 
   data () {
     return {
-      // text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。',
-      // color:'#333',
-      // fontSize:0.4800,//18px
-      // lineHeight:0.8533,//32px
-      // paddingTop:.2667,//20px
-      // paddingBottom:0,
-      // paddingLeft:.32,//24px
-      // paddingRight:.32,
     }
   },
   computed:{

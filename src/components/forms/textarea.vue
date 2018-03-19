@@ -5,8 +5,7 @@
       type="textarea"
       :autosize="{ minRows: 3}"
       placeholder="请输入内容"
-      :value="text"
-      @input='changeText'
+      v-model="text"
       >
     </el-input>
   </div>
@@ -24,16 +23,20 @@ export default {
   computed:{...mapState({
     selectedCompIndex:'selectedCompIndex',
   }),
-  text(){
+  text:{
+    get(){
       return this.$store.state.myPageComps[this.selectedCompIndex]['data']['text'];
+    },
+    set(value){
+      this.$store.commit('changeValue',{key:'text',value:value});
+    }
+
    }
 },
 
 
   methods:{
-    changeText(value){
-      this.$store.commit('changeValue', {key:'text',value:value})
-    }
+
 
   }
 }

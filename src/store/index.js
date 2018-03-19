@@ -24,9 +24,9 @@ export default new Vuex.Store({
       name:'paragraph1',
       data:{
         text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。',
-        color:'#333',
-        fontSize:0.4800,//18px
-        lineHeight:0.8533,//32px
+
+
+
         padding:{
           top:.2667,//20px
           bottom:0,
@@ -38,7 +38,25 @@ export default new Vuex.Store({
           bottom:0,
           left:0,
           right:0
-        }
+        },
+        textAlign:'left',
+        backgroundColor:'',
+
+        border:{
+          width:'2',
+          style:'solid',
+          color:'#000'
+        },
+
+        font:{
+          fontSize: 0.4800,//18px
+          lineHeight:0.8533,//32px
+          color:'#333',
+          weight:'normal',
+          fontStyle:'unset',
+          textDecoration:'none'
+
+        },
 
 
 
