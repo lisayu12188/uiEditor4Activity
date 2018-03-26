@@ -1,18 +1,18 @@
 <template>
-  <img :src="imgSrc" alt="" class="banner">
+  <img :src="value.src" alt="" class="banner">
 </template>
 
 
 <script>
-import imgSrc from '../../assets/img/banner.jpg'
+
 export default {
   name: 'headerBannerImg1',
 
   data () {
     return {
-      imgSrc: imgSrc,
     }
   },
+  props:['value'],
 
   methods:{
 

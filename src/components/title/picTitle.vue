@@ -1,31 +1,19 @@
 <template>
-  <img :src="imgSrc" alt="" class="title"
-  :style="{
-    paddingTop: paddingTop+'rem',
-    paddingBottom: paddingTop+'rem',
-    paddingLeft: paddingLeft+'rem',
-    paddingRight: paddingRight+'rem',
-
-
-
-  }">
+  <img :src="value.src" alt="" class="title">
 </template>
 
 
 <script>
-import imgSrc from '../../assets/img/pic-title.png'
+
 export default {
   name: 'picTitle',
 
   data () {
     return {
-      imgSrc: imgSrc,
-      paddingTop:.2667,//20px
-      paddingBottom:0,
-      paddingLeft:.32,//24px
-      paddingRight:.32,
+
     }
   },
+  props:['value'],
 
 
   methods:{
@@ -40,6 +28,10 @@ export default {
 <style scoped>
 .title{
   width: 10rem;
+  padding-top:.2667rem;//20px
+  padding-bottom:0;
+  padding-left:.32rem;//24px
+  padding-right:.32rem;
 }
 
 

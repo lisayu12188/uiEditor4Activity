@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import { createRouter } from './router'
 import store from './store'
 import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup} from 'element-ui'
 
@@ -36,6 +37,17 @@ Vue.use(OptionGroup);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+// export function createApp (ssrContext) {
+//     const router = createRouter()
+//     const app = new Vue({
+//       store,
+//         router,
+//         ssrContext,
+//         render: h => h(App)
+//     })
+//     return { app, router }
+// }
+//
 new Vue({
   el: '#app',
   router,

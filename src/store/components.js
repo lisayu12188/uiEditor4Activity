@@ -55,15 +55,15 @@ const allComponents = [
   },
   {
     name: 'paragraph1',
-    forms: ['textareaForm', 'fontSet','commonForms']
+    forms: ['textareaForm']
   },
   {
     name: 'title1',
-    forms: ['inputForm', 'fontSet','commonForms']
+    forms: ['inputForm']
   },
   {
     name: 'picTitle',
-    forms: ['uploadImg','commonForms']
+    forms: ['uploadImg']
   },
 
 

@@ -4,10 +4,66 @@ import img from './modules/img'
 import paragraph from './modules/paragraph'
 import components from './components'
 
+import imgSrc from '../assets/img/pic-title.png'
+import bannerSrc from '../assets/img/banner.jpg'
+
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
+const datas = {
+  headerBannerImg1:{
+    name:'headerBannerImg1',
+    data:{
+      src:bannerSrc
+    },
+    forms:['uploadImg']
+  },
+  paragraph1:{
+    name:'paragraph1',
+    data:{
+      text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。'
+    },
 
+    forms:['textareaForm']
+  },
+  picTitle:{
+    name:'picTitle',
+    data:{
+      src:imgSrc
+    },
+    forms:['uploadImg']
+  },
+  title1: {
+    name:'title1',
+    data:{
+      text:'我是h2标题',
+      color:'#333'
+    },
+    forms:['textareaForm']
+  },
+  blackFooter:{
+    name:'blackFooter',
+    data:{
+      backgroundColor:'transparent'
+    },
+    forms:['backgroundColor']
+  },
+  whiteFooter: {
+    name:'whiteFooter',
+    data:{
+      backgroundColor:'transparent'
+    },
+    forms:['backgroundColor']
+  },
+
+
+}
+
+
+// 拷贝
+function clone(obj){
+  return JSON.parse(JSON.stringify(obj))
+}
 export default new Vuex.Store({
   // modules: {
   //   img,
@@ -20,52 +76,10 @@ export default new Vuex.Store({
     selectedCompIndex: 0,
     allComponents: components.allComponents,
     allForms: components.allForms,
-    myPageComps:[{
-      name:'paragraph1',
-      data:{
-        text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。',
-
-
-
-        padding:{
-          top:.2667,//20px
-          bottom:0,
-          left:.32,//24px
-          right:.32
-        },
-        margin:{
-          top:0,
-          bottom:0,
-          left:0,
-          right:0
-        },
-        textAlign:'left',
-        backgroundColor:'',
-
-        border:{
-          width:'2',
-          style:'solid',
-          color:'#000'
-        },
-
-        font:{
-          fontSize: 0.4800,//18px
-          lineHeight:0.8533,//32px
-          color:'#333',
-          weight:'normal',
-          fontStyle:'unset',
-          textDecoration:'none'
-
-        },
-
-
-
-      }
-    }],
-    forms:[
-      // 'uploadImg'
-      'textareaForm', 'fontSet','commonForms'
+    myPageComps:[
+      clone(datas.headerBannerImg1),
     ]
+
   },
   mutations:{
     getSelectedIndex(state,index) {
@@ -82,7 +96,7 @@ export default new Vuex.Store({
       // state.isCurrent = moduleName
     },
 
-    deletestateComp(state,index) {
+    deleteThisComp(state,index) {
       state.myPageComps.splice(index, 1)
       state.selectedCompIndex = -1
     },
@@ -111,9 +125,7 @@ export default new Vuex.Store({
     },
 
     addComp(state,compName) {
-      const selected = {
-        name: compName
-      };
+      let selected = clone(datas[compName]);
       const len = state.myPageComps.length;
       if (state.selectedCompIndex < 0 || state.selectedCompIndex === len - 1) { //添加到最后
         state.myPageComps.push(selected);
@@ -131,17 +143,13 @@ export default new Vuex.Store({
 
     },
 
-    updateForms(state, compName){
-      updateForms(state,compName)
-    },
+
 
     changeValue(state,payload){
       state.myPageComps[state.selectedCompIndex].data[payload.key] = payload.value
     },
 
-    changeStyle(state,payload){
-      state.myPageComps[state.selectedCompIndex].data[payload.key][payload.subKey] = payload.value
-    },
+
 
 
 
@@ -150,8 +158,3 @@ export default new Vuex.Store({
 
   strict: debug,
 })
-
-function updateForms(state,compName) {
-  const currentComp = state.allComponents.find(val => val.name === compName)
-  state.forms = currentComp && currentComp.forms
-}
