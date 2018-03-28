@@ -17,6 +17,8 @@ import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
+
+// 从服务器获取以下json文件
 var myPageComps = {
   code: '', //活动code
   pageId: '', //页面埋点

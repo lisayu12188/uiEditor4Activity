@@ -3,7 +3,7 @@
 
     <el-upload
       class="upload-demo"
-      action="http://localhost:8080/static/img/"
+      action="http://api.qa.91jkys.com:9105/mall/uploadImage"
       :on-success='handleSuccess'
       :on-remove="handleRemove"
       :file-list="fileList2"

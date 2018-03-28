@@ -13,7 +13,7 @@
     <ul class="nav nav-tabs">
       <li @click="showModule('pageSet')" :class="{current:mymodule ==='pageSet'}">页面设置</li>
       <li @click="showModule('colorSet')" :class="{current:mymodule ==='colorSet'}">颜色配置</li>
-      <li @click="showModule('historyList')" :class="{current:mymodule ==='historyList'}">历史版本</li>
+      <li @click="showModule('historyList')" :class="{current:mymodule ==='historyList'}">活动列表</li>
       <!-- <li @click='history'>历史版本</li> -->
       <li class="component">页面模块</li>
       <li @click="showModule('pageModule')" :class="{current:mymodule ==='pageModule'}">页面模板</li>
