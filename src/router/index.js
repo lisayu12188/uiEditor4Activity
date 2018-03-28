@@ -23,3 +23,22 @@ export default new Router({
 
   ]
 })
+export function createRouter () {
+    return new Router({
+        mode: 'history',
+        scrollBehavior: () => ({ y: 0 }),
+        routes: [
+          {
+            path: '/home',
+            name: 'Home',
+            component: Home
+          },
+          {
+            path: '/mypage',
+            name: 'Mypage',
+            component:  MyPage
+          },
+          { path: '/', redirect: '/home' }
+        ]
+    })
+}

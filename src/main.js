@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import { createRouter } from './router'
 import store from './store'
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup} from 'element-ui'
 
 Vue.prototype.$ELEMENT = { size: 'small' }
@@ -37,17 +39,18 @@ Vue.use(OptionGroup);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-// export function createApp (ssrContext) {
-//     const router = createRouter()
-//     const app = new Vue({
-//       store,
-//         router,
-//         ssrContext,
-//         render: h => h(App)
-//     })
-//     return { app, router }
-// }
-//
+export function createApp (ssrContext) {
+    const router = createRouter()
+    const app = new Vue({
+      store,
+        router,
+        ssrContext,
+        render: h => h(App)
+    })
+    return { app, router }
+}
+
+
 new Vue({
   el: '#app',
   router,

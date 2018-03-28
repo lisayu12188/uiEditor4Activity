@@ -1,5 +1,6 @@
 <template>
   <div>
+
   <div class="mycomponent-wrapper " v-for='(myPageComp,index) in myPageComps' @click='getSelectedIndex(index)'>
     <div :is='myPageComp.name' class=" mycomponent div1" v-model='myPageComp.data'>
       {{myPageComp.name}}
@@ -9,7 +10,7 @@
 
 </template>
 <script>
-import { mapState } from 'vuex' // 不用vuex， 用生成的json文件
+import { mapState } from 'vuex'
 import headerBannerImg1 from '../components/header/headerBannerImg1'
 import whiteFooter from '../components/footer/blackFooter'
 import blackFooter from '../components/footer/whiteFooter'
@@ -17,7 +18,7 @@ import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
 
-
+console.log(paragraph1)
 export default {
   data() {
     return {

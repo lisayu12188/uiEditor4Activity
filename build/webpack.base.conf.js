@@ -49,6 +49,13 @@ module.exports = {
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     { loader: "css-loader" },
+      //     { loader: "style-loader" }
+      //   ]
+      // },
       {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
@@ -68,7 +75,12 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      // {
+      //   test: /\.(woff|svg|eot|ttf)\??.*$/,
+      //   loader: 'url-loader'
+      // }
+
     ]
   },
   node: {
