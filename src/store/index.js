@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as actions from './actions'
 import VuexUndoRedo from "vuex-undo-redo"
 
 import components from './components'
@@ -8,7 +9,7 @@ import imgSrc from '../assets/img/pic-title.png'
 import bannerSrc from '../assets/img/banner.jpg'
 
 Vue.use(Vuex)
-Vue.use(VuexUndoRedo)
+// Vue.use(VuexUndoRedo)
 
 const debug = process.env.NODE_ENV !== 'production'
 const datas = {
@@ -66,6 +67,7 @@ function clone(obj){
   return JSON.parse(JSON.stringify(obj))
 }
 export default new Vuex.Store({
+  actions,
   modules: {
 
 
@@ -78,7 +80,8 @@ export default new Vuex.Store({
     allForms: components.allForms,
     myPageComps:[
       clone(datas.headerBannerImg1),
-    ]
+    ],
+    activities:[]
 
   },
   mutations:{
@@ -152,6 +155,14 @@ export default new Vuex.Store({
     changeValue(state,payload){
       state.myPageComps[state.selectedCompIndex].data[payload.key] = payload.value
     },
+
+    getActivities(state,list){
+      state.activities = list
+    },
+
+    getMyPageComps(state,list){
+      state.myPageComps = list
+    }
 
 
 

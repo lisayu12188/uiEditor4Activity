@@ -128,7 +128,6 @@
 
 <script>
 import activities from '../components/page/activities'
-
 import pageSet from '../components/wholePage/pageSet'
 import mybtns from '../components/mybtns'
 import headerBannerImg1 from '../components/header/headerBannerImg1'
@@ -148,8 +147,8 @@ import uploadImg from '../components/forms/uploadImg'
 import backgroundColor from '../components/forms/backgroundColor'
 // import fontSet from '../components/forms/fontSet'
 // import commonForms from '../components/forms/commonForms'
-import { mapState } from 'vuex'
-import { mapMutations } from 'vuex'
+
+import { mapState,mapMutations } from 'vuex'
 
 
 export default {
@@ -197,6 +196,7 @@ export default {
   watch: {
 
   },
+
   methods: {
     ...mapMutations([
       'getSelectedIndex',
@@ -207,8 +207,9 @@ export default {
       'moveToFirst',
       'addComp',
     ]),
+
     undoComp() {
-				this.undo();
+				// this.undo();
 
         let myPageComps = { ... this.myPageComps }
         myPageComps.unshift()
@@ -221,7 +222,7 @@ export default {
 				// this.$refs.canvas.draw();
 			},
 		redoComp() {
-			this.redo();
+			// this.redo();
       console.log('redo')
 			// this.$refs.canvas.draw();
 		},

@@ -18,7 +18,7 @@
         label="活动名称">
       </el-table-column>
       <el-table-column
-        prop="date"
+        prop="time"
         label="日期">
       </el-table-column>
 
@@ -26,28 +26,34 @@
     </div>
 </template>
 <script>
-
-
-
+import { mapState,mapMutations,mapActions } from 'vuex'
 
 
 export default {
   data() {
     return {
-      activities:[{
-          date: '2016-05-02',
-          name: '王小虎'
-        },
-        {
-        date: '2016-05-02',
-        name: '王小虎'
-        }
-      ]}
-    },
+
+    }
+  },
+  computed:{
+    ...mapState([
+      'activities'
+    ])
+  },
+  created(){
+    this.fetchActivities()
+  },
   methods:{
+    ...mapMutations([
+      'getMyPageComps'
+    ]),
+    ...mapActions([
+      'fetchActivities'
+    ]),
     handleCurrentChange(currentRow){
-      console.log(currentRow)
-      let name = currentRow.name
+      let comps = currentRow.components
+      this.getMyPageComps(comps)
+
     }
   }
 
