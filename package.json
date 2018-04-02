@@ -10,10 +10,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-helper-module-imports": "^7.0.0-beta.3",
     "bootstrap": "^4.0.0",
     "element-ui": "^2.2.2",
     "koa-bodyparser": "^4.2.0",
+    "koa2-cors": "^2.0.5",
     "mz": "^2.7.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

@@ -4,6 +4,7 @@ const Koa = require('koa')
 const KoaRuoter = require('koa-router')
 const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static')
+var cors = require('koa2-cors');
 const { createBundleRenderer } = require('vue-server-renderer')
 const LRU = require('lru-cache')
 
@@ -74,6 +75,20 @@ function render (ctx, next) {
 app.use(bodyParser());
 app.use(serve('/dist', './dist', true))
 app.use(serve('/public', './public', true))
+app.use(cors({
+    origin: function (ctx) {
+        if (ctx.url === '/test') {
+            return "*"; // 允许来自所有域名请求
+        }
+        return 'http://dev.91jkys.com:8080'; //这样就能只允许 http://localhost:8080 这个域名的请求了
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}))
+
 
 router.get('/activities', require('./lib/actions/getActivities'));
 router.post('/activities', require('./lib/actions/saveActivity'));
