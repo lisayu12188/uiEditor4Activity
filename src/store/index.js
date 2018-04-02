@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexUndoRedo from "vuex-undo-redo"
-import img from './modules/img'
-import paragraph from './modules/paragraph'
+
 import components from './components'
 
 import imgSrc from '../assets/img/pic-title.png'
@@ -67,11 +66,10 @@ function clone(obj){
   return JSON.parse(JSON.stringify(obj))
 }
 export default new Vuex.Store({
-  // modules: {
-  //   img,
-  //   paragraph
-  //
-  // },
+  modules: {
+
+
+  },
 
   state:{
     mymodule: 'pageSet',
@@ -150,9 +148,12 @@ export default new Vuex.Store({
 
 
 
+
     changeValue(state,payload){
       state.myPageComps[state.selectedCompIndex].data[payload.key] = payload.value
     },
+
+
 
 
 

@@ -8,7 +8,7 @@ import store from './store'
 
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
-import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup} from 'element-ui'
+import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup,Table,TableColumn} from 'element-ui'
 
 
 Vue.prototype.$ELEMENT = { size: 'small' }
@@ -37,6 +37,8 @@ Vue.use(CheckboxGroup);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(OptionGroup);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 Vue.config.productionTip = false
 

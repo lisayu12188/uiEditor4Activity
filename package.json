@@ -5,7 +5,7 @@
   "author": "yupeiying <pyyu@91jkys.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --public static.qa.91jkys.com:8081 --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --public dev.91jkys.com:8080 --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },

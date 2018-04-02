@@ -39,7 +39,9 @@
 
       <div class="leftPanel" v-show="mymodule === 'colorSet'">颜色配置</div>
       <div class="leftPanel" v-show="mymodule === 'pageModule'">页面模板</div>
-      <div class="leftPanel" v-show="mymodule === 'historyList'">历史版本</div>
+      <div class="leftPanel" v-show="mymodule === 'historyList'">
+        <activities></activities>
+      </div>
       <div class="leftPanel" v-show="mymodule === 'header'">
         页头1：
         <div class="header-comp-wrapper" @click="addComp('headerBannerImg1')">
@@ -125,6 +127,8 @@
 </template>
 
 <script>
+import activities from '../components/page/activities'
+
 import pageSet from '../components/wholePage/pageSet'
 import mybtns from '../components/mybtns'
 import headerBannerImg1 from '../components/header/headerBannerImg1'
@@ -133,6 +137,8 @@ import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
+
+
 
 
 // forms
@@ -149,9 +155,6 @@ import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
-
-
-
 
 
     }
@@ -179,6 +182,8 @@ export default {
     paragraph1,
     picTitle,
     title1,
+
+    activities,
 
     // forms
     inputForm,
@@ -374,7 +379,7 @@ export default {
 /* banner-img */
 
 .leftPanel {
-  width: 100%;
+  width: 95%;
   margin: 0 auto;
 }
 
