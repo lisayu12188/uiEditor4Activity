@@ -4,24 +4,6 @@
 
 const path = require('path')
 
-var getIp=function(){
-    var os=require('os'),
-         ipStr,
-        infaces=os.networkInterfaces(),
-         bool=false;
-    for(var i in infaces){
-        infaces[i].some(function(x){
-            if((x.family=='IPv4')&&(x.internal == false)){
-                ipStr=x.address;
-                bool=true;
-                return true
-            }
-        })
-        if(bool){break}
-    }
-    return ipStr
-}
-
 module.exports = {
   dev: {
 
@@ -31,7 +13,7 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: getIp(), // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

@@ -5,7 +5,7 @@
   "author": "yupeiying <pyyu@91jkys.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --public static.qa.91jkys.com:8081 --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
@@ -13,6 +13,8 @@
     "babel-helper-module-imports": "^7.0.0-beta.3",
     "bootstrap": "^4.0.0",
     "element-ui": "^2.2.2",
+    "koa-bodyparser": "^4.2.0",
+    "mz": "^2.7.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.16",
@@ -53,6 +55,7 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
+    "vuex-undo-redo": "^1.0.5",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",

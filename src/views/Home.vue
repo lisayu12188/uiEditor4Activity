@@ -85,8 +85,8 @@
     <div class="middle ">
 
       <el-button-group>
-        <el-button type="primary" icon="el-icon-refresh" >恢复</el-button>
-        <el-button type="primary" icon="el-icon-remove">撤销</el-button>
+        <el-button type="primary" icon="el-icon-refresh" @click='redoComp'>恢复</el-button>
+        <el-button type="primary" icon="el-icon-remove" @click='undoComp'>撤销</el-button>
         <el-button type="primary" icon="el-icon-upload">保存</el-button>
         <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link>
         <!-- <el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button> -->
@@ -202,6 +202,24 @@ export default {
       'moveToFirst',
       'addComp',
     ]),
+    undoComp() {
+				this.undo();
+
+        let myPageComps = { ... this.myPageComps }
+        myPageComps.unshift()
+
+        // this.deleteThisComp()
+
+
+        console.log('undo')
+
+				// this.$refs.canvas.draw();
+			},
+		redoComp() {
+			this.redo();
+      console.log('redo')
+			// this.$refs.canvas.draw();
+		},
 
 
 

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexUndoRedo from "vuex-undo-redo"
 import img from './modules/img'
 import paragraph from './modules/paragraph'
 import components from './components'
@@ -8,6 +9,7 @@ import imgSrc from '../assets/img/pic-title.png'
 import bannerSrc from '../assets/img/banner.jpg'
 
 Vue.use(Vuex)
+Vue.use(VuexUndoRedo)
 
 const debug = process.env.NODE_ENV !== 'production'
 const datas = {
@@ -82,6 +84,9 @@ export default new Vuex.Store({
 
   },
   mutations:{
+    emptyState() {
+      this.replaceState({ myval: null });
+    },
     getSelectedIndex(state,index) {
       if (state.selectedCompIndex === index) {
         state.selectedCompIndex = -1

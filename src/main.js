@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import { createRouter } from './router'
 import store from './store'
+
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
 import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup} from 'element-ui'
+
 
 Vue.prototype.$ELEMENT = { size: 'small' }
 Vue.use(Menu)

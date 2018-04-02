@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const Koa = require('koa')
 const KoaRuoter = require('koa-router')
+const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static')
 const { createBundleRenderer } = require('vue-server-renderer')
 const LRU = require('lru-cache')
@@ -63,15 +64,19 @@ function render (ctx, next) {
             if (err) {
                 return handleError(err)
             }
-            console.log(html)
+            //console.log(html)
             ctx.body = html
             resolve()
         })
     })
 }
 
+app.use(bodyParser());
 app.use(serve('/dist', './dist', true))
 app.use(serve('/public', './public', true))
+
+router.get('/activities', require('./lib/actions/getActivities'));
+router.post('/activities', require('./lib/actions/saveActivity'));
 
 router.get('*', render)
 app.use(router.routes()).use(router.allowedMethods())
