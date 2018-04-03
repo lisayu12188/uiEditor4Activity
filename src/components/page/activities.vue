@@ -1,7 +1,7 @@
 <template>
   <div>
   <el-table
-      :data="activities"
+      :data="activitiesCopy"
        highlight-current-row
        @current-change="handleCurrentChange"
 
@@ -18,8 +18,8 @@
         label="活动名称">
       </el-table-column>
       <el-table-column
-        prop="time"
-        label="日期">
+        prop="timeParsed"
+        label="创建时间">
       </el-table-column>
 
     </el-table>
@@ -27,8 +27,20 @@
 </template>
 <script>
 import { mapState,mapMutations,mapActions } from 'vuex'
-
-
+function add0(num){
+  if(num < 10){
+    return "0"+num
+  }
+  return num
+}
+function parseTime(time) {
+   let ms = new Date(time)
+  let timeParsed =  ms.getFullYear() +'-' + (ms.getMonth()+ 1) +'-' + ms.getDate() +' ' + add0(ms.getHours()) +':' + add0(ms.getMinutes() ) +':' + add0(ms.getSeconds())
+  return timeParsed
+}
+function clone(obj){
+  return JSON.parse(JSON.stringify(obj))
+}
 export default {
   data() {
     return {
@@ -37,22 +49,39 @@ export default {
   },
   computed:{
     ...mapState([
-      'activities'
-    ])
+      'activities',
+    ]),
+    activitiesCopy(){
+        let copy = clone(this.activities)
+        copy.reverse();
+        copy.map( (val) => {
+          return val.timeParsed = parseTime(val.time)
+        })
+        return copy
+    }
   },
   created(){
     this.fetchActivities()
   },
   methods:{
     ...mapMutations([
-      'getMyPageComps'
+      'getMyPageComps',
+      'renderMyPageComps',
+      'getCurrentAct'
+
     ]),
     ...mapActions([
       'fetchActivities'
     ]),
     handleCurrentChange(currentRow){
       let comps = currentRow.components
+      console.log(currentRow,comps)
+      this.$router.push({ path: '', query: { actCode: currentRow.name }})
+      const act = {name:currentRow.name,file:currentRow.time}
+      this.getCurrentAct(act)
       this.getMyPageComps(comps)
+
+
 
     }
   }

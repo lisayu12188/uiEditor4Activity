@@ -12,13 +12,15 @@ Vue.use(Vuex)
 // Vue.use(VuexUndoRedo)
 
 const debug = process.env.NODE_ENV !== 'production'
+
+
 const datas = {
   headerBannerImg1:{
     name:'headerBannerImg1',
     data:{
       src:bannerSrc
     },
-    forms:['uploadImg']
+    // forms:['uploadImg']
   },
   paragraph1:{
     name:'paragraph1',
@@ -26,14 +28,14 @@ const datas = {
       text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。'
     },
 
-    forms:['textareaForm']
+    // forms:['textareaForm']
   },
   picTitle:{
     name:'picTitle',
     data:{
       src:imgSrc
     },
-    forms:['uploadImg']
+    // forms:['uploadImg']
   },
   title1: {
     name:'title1',
@@ -41,21 +43,21 @@ const datas = {
       text:'我是h2标题',
       color:'#333'
     },
-    forms:['textareaForm']
+    // forms:['textareaForm']
   },
   blackFooter:{
     name:'blackFooter',
     data:{
       backgroundColor:'transparent'
     },
-    forms:['backgroundColor']
+    // forms:['backgroundColor']
   },
   whiteFooter: {
     name:'whiteFooter',
     data:{
       backgroundColor:'transparent'
     },
-    forms:['backgroundColor']
+    // forms:['backgroundColor']
   },
 
 
@@ -81,9 +83,11 @@ export default new Vuex.Store({
     myPageComps:[
       clone(datas.headerBannerImg1),
     ],
-    activities:[]
+    activities:[],
+    currentAct:{},
 
   },
+
   mutations:{
     emptyState() {
       this.replaceState({ myval: null });
@@ -162,7 +166,15 @@ export default new Vuex.Store({
 
     getMyPageComps(state,list){
       state.myPageComps = list
+    },
+
+    saveActivity(state){
+
+    },
+    getCurrentAct(state,act){
+      state.currentAct = act
     }
+
 
 
 

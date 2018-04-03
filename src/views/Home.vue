@@ -89,7 +89,7 @@
       <el-button-group>
         <el-button type="primary" icon="el-icon-refresh" @click='redoComp'>恢复</el-button>
         <el-button type="primary" icon="el-icon-remove" @click='undoComp'>撤销</el-button>
-        <el-button type="primary" icon="el-icon-upload">保存</el-button>
+        <el-button type="primary" icon="el-icon-upload" @click='save'>保存</el-button>
         <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link>
         <!-- <el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button> -->
         <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i>发布线上</el-button> -->
@@ -148,9 +148,30 @@ import backgroundColor from '../components/forms/backgroundColor'
 // import fontSet from '../components/forms/fontSet'
 // import commonForms from '../components/forms/commonForms'
 
-import { mapState,mapMutations } from 'vuex'
+import { mapState,mapMutations,mapActions } from 'vuex'
 
+const allForms = {
+  headerBannerImg1:['uploadImg'],
+  paragraph1:['textareaForm'],
+  picTitle:['uploadImg'],
+  title1:['textareaForm'],
+  blackFooter:['backgroundColor'],
+  whiteFooter:['backgroundColor']
+}
 
+function parseQuery(qs) {
+  qs = qs.replace(/^\?/, '');
+  var parts = qs.split(/&/);
+  var re = /([^=]+)=(.*)/;
+  var query = {};
+  for (var i = 0; i < parts.length; i++) {
+    var match = re.exec(parts[i]);
+    if (match) {
+      query[match[1]] = decodeURIComponent(match[2]);
+    }
+  }
+  return query;
+}
 export default {
   data() {
     return {
@@ -165,10 +186,11 @@ export default {
     'allComponents',
     'allForms',
     'myPageComps',
+    'currentAct'
   ]),
   forms(){
-    console.log(this.selectedCompIndex)
-    return this.myPageComps[this.selectedCompIndex] && this.myPageComps[this.selectedCompIndex]['forms'] || []
+     let name = this.myPageComps[this.selectedCompIndex] && this.myPageComps[this.selectedCompIndex]['name']
+     return allForms[name]
   }
 },
 
@@ -207,6 +229,9 @@ export default {
       'moveToFirst',
       'addComp',
     ]),
+    ...mapActions([
+      'saveActivity'
+    ]),
 
     undoComp() {
 				// this.undo();
@@ -226,6 +251,28 @@ export default {
       console.log('redo')
 			// this.$refs.canvas.draw();
 		},
+
+    save(){
+      let myPageComps = [...this.myPageComps]
+
+      myPageComps.forEach( (val) => {
+        delete val.forms
+      })
+
+
+
+      let name = this.currentAct.name;
+      let file = this.currentAct.file
+
+
+
+      let params = {
+        file:file,
+        data:{name:name,components: myPageComps}
+      }
+
+      this.saveActivity(params)
+    }
 
 
 
