@@ -65,7 +65,7 @@ export default {
   },
   methods:{
     ...mapMutations([
-      'getMyPageComps',
+      'getPageConfigComps',
       'renderMyPageComps',
       'getCurrentAct'
 
@@ -74,12 +74,11 @@ export default {
       'fetchActivities'
     ]),
     handleCurrentChange(currentRow){
-      let comps = currentRow.components
-      console.log(currentRow,comps)
+      
       this.$router.push({ path: '', query: { actCode: currentRow.name }})
       const act = {name:currentRow.name,file:currentRow.time}
       this.getCurrentAct(act)
-      this.getMyPageComps(comps)
+      this.getPageConfigComps(currentRow)
 
 
 

@@ -83,10 +83,23 @@ export default new Vuex.Store({
     myPageComps:[
       clone(datas.headerBannerImg1),
     ],
+    pageConfig:{
+      actCode:'',
+      actTitle:'',
+
+        shareLink:'',
+        shareTitle:'',
+        shareContent:'',
+        shareDesc:'',
+        sharePic:''
+
+    },
     activities:[],
-    currentAct:{},
+    currentAct:null
 
   },
+
+
 
   mutations:{
     emptyState() {
@@ -164,16 +177,20 @@ export default new Vuex.Store({
       state.activities = list
     },
 
-    getMyPageComps(state,list){
-      state.myPageComps = list
+    getPageConfigComps(state,list){
+      state.pageConfig = list.pageConfig
+      state.myPageComps = list.components
     },
 
-    saveActivity(state){
-
-    },
     getCurrentAct(state,act){
       state.currentAct = act
-    }
+    },
+
+    setPageConfig(state,payload){
+      state.pageConfig[payload.key] = payload.value
+    },
+
+
 
 
 
@@ -187,3 +204,7 @@ export default new Vuex.Store({
 
   strict: debug,
 })
+
+function clone(obj){
+  return JSON.parse(JSON.stringify(obj))
+}

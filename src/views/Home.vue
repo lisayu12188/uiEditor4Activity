@@ -122,6 +122,10 @@
         <div :is='form'></div>
       </div>
     </div>
+
+
+
+
   </div>
 </div>
 </template>
@@ -148,7 +152,7 @@ import backgroundColor from '../components/forms/backgroundColor'
 // import fontSet from '../components/forms/fontSet'
 // import commonForms from '../components/forms/commonForms'
 
-import { mapState,mapMutations,mapActions } from 'vuex'
+import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
 
 const allForms = {
   headerBannerImg1:['uploadImg'],
@@ -186,8 +190,11 @@ export default {
     'allComponents',
     'allForms',
     'myPageComps',
-    'currentAct'
+    'currentAct',
+    'pageConfig'
+
   ]),
+
   forms(){
      let name = this.myPageComps[this.selectedCompIndex] && this.myPageComps[this.selectedCompIndex]['name']
      return allForms[name]
@@ -206,6 +213,7 @@ export default {
 
     activities,
 
+
     // forms
     inputForm,
     textareaForm,
@@ -215,9 +223,7 @@ export default {
     // commonForms
 
   },
-  watch: {
 
-  },
 
   methods: {
     ...mapMutations([
@@ -253,6 +259,7 @@ export default {
 		},
 
     save(){
+      let name,file;
       let myPageComps = [...this.myPageComps]
 
       myPageComps.forEach( (val) => {
@@ -260,18 +267,38 @@ export default {
       })
 
 
+      if(!!this.currentAct){
+        file = this.currentAct.file
+      }
+      name = this.pageConfig.actCode
+      if(!name){
 
-      let name = this.currentAct.name;
-      let file = this.currentAct.file
+        this.$message({
+          message: '页面设置：活动code不能为空',
+          type: 'warning',
+          center:true,          
+        })
 
+        this.showModule('pageSet')
+
+        return
+      }
 
 
       let params = {
         file:file,
-        data:{name:name,components: myPageComps}
+        data:{name:name,components: myPageComps,pageConfig:this.pageConfig}
       }
 
-      this.saveActivity(params)
+      this.saveActivity(params).then(data=>{
+        if(data.data.code === 2000){
+          this.$message({
+            message: '保存成功',
+            type: 'success',
+            center:true
+          })
+        }
+      })
     }
 
 
@@ -292,7 +319,7 @@ export default {
   top: 0;
   left: 0;
   padding: 0 10px;
-  z-index: 9999;
+  z-index: 2;
   box-shadow: 0 0 6px rgba(0, 0, 0, .2);
 }
 
