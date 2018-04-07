@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('mz/fs')
 const path = require('path')
 const Koa = require('koa')
 const KoaRuoter = require('koa-router')
@@ -12,6 +12,8 @@ const resolve = file => path.resolve(__dirname, file)
 const app = new Koa()
 const router = new KoaRuoter()
 const template = fs.readFileSync(resolve('./src/index.template.html'), 'utf-8')
+
+import * as Uitils from './src/utils'
 
 function createRenderer (bundle, options) {
     return createBundleRenderer(
@@ -42,35 +44,52 @@ renderer = createRenderer(bundle, {
  * @param next
  * @returns {Promise}
  */
-function render (ctx, next) {
-    ctx.set("Content-Type", "text/html")
-    return new Promise (function (resolve, reject) {
-        const handleError = err => {
-            if (err && err.code === 404) {
-                ctx.status = 404
-                ctx.body = '404 | Page Not Found'
-            } else {
-                ctx.status = 500
-                ctx.body = '500 | Internal Server Error'
-                console.error(`error during render : ${ctx.url}`)
-                console.error(err.stack)
-            }
-            resolve()
-        }
-        const context = {
-            title: 'Vue Ssr 2.3',
-            url: ctx.url
-        }
-        renderer.renderToString(context, (err, html) => {
-            if (err) {
-                return handleError(err)
-            }
-            //console.log(html)
-            ctx.body = html
-            resolve()
-        })
-    })
+
+ // async function getFileData(ctx){
+ //   const time =  Uitils.parseQuery(ctx.url.substr(1)).time
+ //   const file = Uitils.parseTime(time)+'.json'
+ //   const filePath = path.join(__dirname, './data/'+file);
+ //   console.log(filePath)
+ //
+ //   const fileName = await fs.readFile(filePath,'utf8', (err, data) => {
+ //     if (err) throw err;
+ //     console.log(data)
+ //     // resolve(data)
+ //     return data
+ //   });
+ // }
+async function render(ctx) {
+  ctx.set("Content-Type", "text/html");
+
+  const time = ctx.url.split('=')[1]
+  const file = Uitils.parseTime(time)+'.json'
+  const filePath = path.join(__dirname, './data/'+file);
+  if (!(await fs.exists(filePath))) {
+    ctx.throw(404, 'file not exist');
+    return;
+  }
+
+  const data = await fs.readFile(filePath, 'utf8');
+  const fileData = JSON.parse(data);
+  const context = {
+      title: fileData.pageConfig.actTitle,
+      url: ctx.url,
+      components: fileData.components
+  };
+  console.log(context);
+  const html = await renderToString(renderer, context);
+  ctx.body = html;
 }
+
+
+function renderToString(renderer, context) {
+  return new Promise((resolve, reject) => {
+    renderer.renderToString(context, (err, html) => {
+      err ? reject(err) : resolve(html);
+    });
+  });
+}
+
 
 app.use(bodyParser());
 app.use(serve('/dist', './dist', true))
@@ -92,8 +111,9 @@ app.use(cors({
 
 router.get('/activities', require('./lib/actions/getActivities'));
 router.post('/activities', require('./lib/actions/saveActivity'));
+router.get('/current_act', require('./lib/actions/getCurrentAct'));
+router.get('/html', render)
 
-router.get('*', render)
 app.use(router.routes()).use(router.allowedMethods())
 
 const port = process.env.PORT || 8089

@@ -7,6 +7,7 @@ import MyPage from '../views/MyPage'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
 
     {

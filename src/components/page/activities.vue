@@ -74,8 +74,9 @@ export default {
       'fetchActivities'
     ]),
     handleCurrentChange(currentRow){
-      
-      this.$router.push({ path: '', query: { actCode: currentRow.name }})
+
+      // this.$router.push({ path: '', query: { actCode: currentRow.name }})
+      this.$router.push({ path: '', query: { time: currentRow.time }})
       const act = {name:currentRow.name,file:currentRow.time}
       this.getCurrentAct(act)
       this.getPageConfigComps(currentRow)

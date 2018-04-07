@@ -90,7 +90,8 @@
         <el-button type="primary" icon="el-icon-refresh" @click='redoComp'>恢复</el-button>
         <el-button type="primary" icon="el-icon-remove" @click='undoComp'>撤销</el-button>
         <el-button type="primary" icon="el-icon-upload" @click='save'>保存</el-button>
-        <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link>
+        <el-button type="primary" icon="el-icon-mobile-phone" @click='preview'>预览</el-button>
+        <!-- <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link> -->
         <!-- <el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button> -->
         <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i>发布线上</el-button> -->
       </el-button-group>
@@ -140,7 +141,7 @@ import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
-
+import * as Utils from '../utils'
 
 
 
@@ -183,6 +184,7 @@ export default {
 
     }
   },
+
   computed:{
     ...mapState([
     'mymodule',
@@ -223,6 +225,9 @@ export default {
     // commonForms
 
   },
+  created(){
+    this.getCurrentAct()
+  },
 
 
   methods: {
@@ -236,7 +241,9 @@ export default {
       'addComp',
     ]),
     ...mapActions([
-      'saveActivity'
+      'saveActivity',
+      'fetchHtml',
+      'getCurrentAct'
     ]),
 
     undoComp() {
@@ -267,16 +274,18 @@ export default {
       })
 
 
-      if(!!this.currentAct){
-        file = this.currentAct.file
-      }
+      // if(!!this.currentAct){
+      //   file = this.currentAct.file
+      // }
+
+      file = Utils.parseQuery(location.search).time
       name = this.pageConfig.actCode
       if(!name){
 
         this.$message({
           message: '页面设置：活动code不能为空',
           type: 'warning',
-          center:true,          
+          center:true,
         })
 
         this.showModule('pageSet')
@@ -290,15 +299,24 @@ export default {
         data:{name:name,components: myPageComps,pageConfig:this.pageConfig}
       }
 
-      this.saveActivity(params).then(data=>{
+      this.saveActivity(params).then(data => {
         if(data.data.code === 2000){
           this.$message({
             message: '保存成功',
             type: 'success',
             center:true
           })
+          this.$router.push('?time='+data.data.time)
         }
       })
+    },
+
+    preview(){
+      this.fetchHtml().then( data => {
+        const time = Utils.parseQuery(location.search).time
+        window.open('http://dev.91jkys.com:8089/html?time=' + time)
+      })
+
     }
 
 

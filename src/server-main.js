@@ -9,10 +9,12 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 export function createApp (ssrContext) {
-    // console.log('fdfdf');
+    //console.log(ssrContext);
     const app = new Vue({
-      ssrContext,
-      render: h => h(App)
+      // ssrContext,
+      render:  (h) =>  {
+        return h(App, { props: { components: ssrContext.components }})
+      }
     })
     return { app }
 }
