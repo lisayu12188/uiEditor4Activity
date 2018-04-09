@@ -13,8 +13,6 @@ const app = new Koa()
 const router = new KoaRuoter()
 const template = fs.readFileSync(resolve('./src/index.template.html'), 'utf-8')
 
-import * as Uitils from './src/utils'
-
 function createRenderer (bundle, options) {
     return createBundleRenderer(
         bundle,
@@ -45,24 +43,12 @@ renderer = createRenderer(bundle, {
  * @returns {Promise}
  */
 
- // async function getFileData(ctx){
- //   const time =  Uitils.parseQuery(ctx.url.substr(1)).time
- //   const file = Uitils.parseTime(time)+'.json'
- //   const filePath = path.join(__dirname, './data/'+file);
- //   console.log(filePath)
- //
- //   const fileName = await fs.readFile(filePath,'utf8', (err, data) => {
- //     if (err) throw err;
- //     console.log(data)
- //     // resolve(data)
- //     return data
- //   });
- // }
 async function render(ctx) {
   ctx.set("Content-Type", "text/html");
 
-  const time = ctx.url.split('=')[1]
-  const file = Uitils.parseTime(time)+'.json'
+  const id = ctx.query.id;
+  console.log(id);
+  const file = id+'.json';
   const filePath = path.join(__dirname, './data/'+file);
   if (!(await fs.exists(filePath))) {
     ctx.throw(404, 'file not exist');

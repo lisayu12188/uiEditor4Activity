@@ -90,7 +90,8 @@
         <el-button type="primary" icon="el-icon-refresh" @click='redoComp'>恢复</el-button>
         <el-button type="primary" icon="el-icon-remove" @click='undoComp'>撤销</el-button>
         <el-button type="primary" icon="el-icon-upload" @click='save'>保存</el-button>
-        <el-button type="primary" icon="el-icon-mobile-phone" @click='preview'>预览</el-button>
+          <a :href="previewUrl"><el-button type="primary" icon="el-icon-mobile-phone">
+        预览</el-button></a>
         <!-- <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link> -->
         <!-- <el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button> -->
         <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i>发布线上</el-button> -->
@@ -182,6 +183,7 @@ export default {
     return {
 
 
+
     }
   },
 
@@ -200,7 +202,12 @@ export default {
   forms(){
      let name = this.myPageComps[this.selectedCompIndex] && this.myPageComps[this.selectedCompIndex]['name']
      return allForms[name]
+  },
+  previewUrl(){
+    const id = Utils.parseTime(this.$route.query.id)
+    return 'http://dev.91jkys.com:8089/html?id=' + id
   }
+
 },
 
   components: {
@@ -266,7 +273,7 @@ export default {
 		},
 
     save(){
-      let name,file;
+      let name,id;
       let myPageComps = [...this.myPageComps]
 
       myPageComps.forEach( (val) => {
@@ -278,7 +285,7 @@ export default {
       //   file = this.currentAct.file
       // }
 
-      file = Utils.parseQuery(location.search).time
+      id = this.$route.query.id
       name = this.pageConfig.actCode
       if(!name){
 
@@ -295,7 +302,7 @@ export default {
 
 
       let params = {
-        file:file,
+        id:id,
         data:{name:name,components: myPageComps,pageConfig:this.pageConfig}
       }
 
@@ -306,18 +313,12 @@ export default {
             type: 'success',
             center:true
           })
-          this.$router.push('?time='+data.data.time)
+          this.$router.push('?id='+data.data.time)
         }
       })
     },
 
-    preview(){
-      this.fetchHtml().then( data => {
-        const time = Utils.parseQuery(location.search).time
-        window.open('http://dev.91jkys.com:8089/html?time=' + time)
-      })
 
-    }
 
 
 

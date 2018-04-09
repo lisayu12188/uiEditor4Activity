@@ -3,13 +3,13 @@ import * as Utils from '../utils';
 // import * as types from './mutation-types'
 
 export const getCurrentAct = ({commit}) => {
-  const time = Utils.parseQuery(location.search).time;
-  if(!time){
+  let id = Utils.parseQuery(location.search).id;
+  if(!id){
     return
   }
-  const file =  Utils.parseTime(time)
+  id =  Utils.parseTime(id)
 
-  return Fetch.get(`/current_act?time=${file}`).then( data => {
+  return Fetch.get(`/current_act?id=${id}`).then( data => {
     // if(data.data.code === 2000){
     //   commit('getActivities',data.data.data);
     // }
@@ -18,8 +18,13 @@ export const getCurrentAct = ({commit}) => {
 };
 
 export const fetchHtml = ({commit}) => {
-  const file = Utils.parseQuery(location.search).time;
-  return Fetch.get(`/html?time=${file}`).then( data => {
+  let id = Utils.parseQuery(location.search).id;
+  console.log(file)
+  if(file === undefined || !id){
+    return false
+  }
+  id = Utils.parseTime(id)
+  return Fetch.get(`/html?id=${id}`).then( data => {
     // if(data.data.code === 2000){
     //   commit('getActivities',data.data.data);
     // }
