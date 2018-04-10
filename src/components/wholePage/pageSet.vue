@@ -54,11 +54,7 @@
       </el-form-item>
 
       <el-form-item label="图片:">
-        <el-input
-          placeholder="请输入分享图片文件名, 例如 share.jpg"
-          :value="pageConfig.sharePic" @change='updatePageConfig("sharePic",$event)'
-          clearable class="share-input">
-        </el-input>
+        <share-img></share-img>
       </el-form-item>
     </div>
 
@@ -76,6 +72,7 @@ function clone(obj){
   return JSON.parse(JSON.stringify(obj))
 }
 import { mapState,mapMutations,mapActions } from 'vuex'
+import shareImg from './uploadShareImg'
 export default {
   name: 'pageConfig',
 
@@ -87,6 +84,9 @@ export default {
   },
   computed:{
     ...mapState(['pageConfig'])
+  },
+  components:{
+    shareImg
   },
 
   methods:{

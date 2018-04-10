@@ -166,7 +166,9 @@ export default new Vuex.Store({
 
     },
 
-
+    uploadShareImg(state,payload){
+      state.pageConfig.sharePic = payload.url
+    },
 
 
     changeValue(state,payload){

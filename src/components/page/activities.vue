@@ -27,6 +27,7 @@
 </template>
 <script>
 import { mapState,mapMutations,mapActions } from 'vuex'
+import Utils from '../../utils'
 function add0(num){
   if(num < 10){
     return "0"+num
@@ -55,7 +56,8 @@ export default {
         let copy = clone(this.activities)
         copy.reverse();
         copy.map( (val) => {
-          return val.timeParsed = parseTime(val.time)
+          return val.timeParsed = Utils.parseTime(val.time,1)
+          // return val.timeParsed = parseTime(val.time)
         })
         return copy
     }

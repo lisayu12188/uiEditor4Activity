@@ -233,7 +233,7 @@ export default {
 
   },
   created(){
-    this.getCurrentAct()
+      this.getCurrentAct()
   },
 
 
@@ -246,6 +246,7 @@ export default {
       'moveDown',
       'moveToFirst',
       'addComp',
+      'getPageConfigComps'
     ]),
     ...mapActions([
       'saveActivity',
@@ -284,8 +285,8 @@ export default {
       // if(!!this.currentAct){
       //   file = this.currentAct.file
       // }
-
       id = this.$route.query.id
+
       name = this.pageConfig.actCode
       if(!name){
 

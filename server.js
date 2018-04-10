@@ -57,10 +57,28 @@ async function render(ctx) {
 
   const data = await fs.readFile(filePath, 'utf8');
   const fileData = JSON.parse(data);
+  const shareConfig = {
+    title: fileData.pageConfig.shareTitle,
+    desc: fileData.pageConfig.shareDesc,
+    content: fileData.pageConfig.shareContent,
+    imageUrl:fileData.pageConfig.sharePic,
+  }
+  console.log(shareConfig)
   const context = {
       title: fileData.pageConfig.actTitle,
       url: ctx.url,
-      components: fileData.components
+      pageConfig:fileData.pageConfig,
+      components: fileData.components,
+      meta:`<meta name="tracker-id" content='${fileData.pageConfig.actCode}'>`,
+      shareConfig:`
+          temp.configShare = {
+            "link": location.href,
+            "title": "${shareConfig.title}",
+            "desc": "${shareConfig.desc}",
+            "content": "${shareConfig.content}",
+            "imageUrl": "${shareConfig.imageUrl}"
+          }
+        `
   };
   console.log(context);
   const html = await renderToString(renderer, context);

@@ -10,9 +10,9 @@ export const getCurrentAct = ({commit}) => {
   id =  Utils.parseTime(id)
 
   return Fetch.get(`/current_act?id=${id}`).then( data => {
-    // if(data.data.code === 2000){
-    //   commit('getActivities',data.data.data);
-    // }
+    if(data.data.code === 2000){
+      commit('getPageConfigComps',data.data.data);
+    }
     return  data
   })
 };
@@ -25,9 +25,6 @@ export const fetchHtml = ({commit}) => {
   }
   id = Utils.parseTime(id)
   return Fetch.get(`/html?id=${id}`).then( data => {
-    // if(data.data.code === 2000){
-    //   commit('getActivities',data.data.data);
-    // }
     return  data
   })
 };
