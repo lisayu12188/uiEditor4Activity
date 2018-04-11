@@ -5,7 +5,7 @@
 
     <a>活动页面</a>
 
-    <el-button round type="success" icon="el-icon-circle-plus-outline"  size='small'>新建</el-button>
+    <el-button round type="success" icon="el-icon-circle-plus-outline"  size='small' @click='createNew'>新建</el-button>
 
 
     <div class="user">
@@ -269,7 +269,8 @@ export default {
       'moveDown',
       'moveToFirst',
       'addComp',
-      'getPageConfigComps'
+      'getPageConfigComps',
+      'createNewAct'
     ]),
     ...mapActions([
       'saveActivity',
@@ -349,9 +350,16 @@ export default {
          } else {
           alert('浏览器不支持');
          }
-       });
+       })
 
-    }
+    },
+
+    createNew(){
+      this.$router.push({path:'home'});
+      this.createNewAct()
+
+
+    },
 
   }
 

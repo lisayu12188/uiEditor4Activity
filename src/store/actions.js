@@ -4,6 +4,7 @@ import * as Utils from '../utils';
 
 export const getCurrentAct = ({commit}) => {
   let id = Utils.parseQuery(location.search).id;
+  console.log(id)
   if(!id){
     return
   }

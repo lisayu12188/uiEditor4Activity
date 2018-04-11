@@ -6,7 +6,6 @@ import VuexUndoRedo from "vuex-undo-redo"
 import components from './components'
 
 import imgSrc from '../assets/img/pic-title.png'
-import bannerSrc from '../assets/img/banner.jpg'
 
 Vue.use(Vuex)
 // Vue.use(VuexUndoRedo)
@@ -18,7 +17,7 @@ const datas = {
   headerBannerImg1:{
     name:'headerBannerImg1',
     data:{
-      src:bannerSrc
+      src:'http://static.qa.91jkys.com/activity/img/bf9452a366494c11b68007141019011d.jpg'
     },
     // forms:['uploadImg']
   },
@@ -68,6 +67,17 @@ const datas = {
 function clone(obj){
   return JSON.parse(JSON.stringify(obj))
 }
+let configInitData = {
+  actCode:'',
+  actTitle:'',
+
+    shareLink:'',
+    shareTitle:'',
+    shareContent:'',
+    shareDesc:'',
+    sharePic:''
+
+}
 export default new Vuex.Store({
   actions,
   modules: {
@@ -83,17 +93,7 @@ export default new Vuex.Store({
     myPageComps:[
       clone(datas.headerBannerImg1),
     ],
-    pageConfig:{
-      actCode:'',
-      actTitle:'',
-
-        shareLink:'',
-        shareTitle:'',
-        shareContent:'',
-        shareDesc:'',
-        sharePic:''
-
-    },
+    pageConfig:{...configInitData},
     activities:[],
     currentAct:null
 
@@ -191,13 +191,13 @@ export default new Vuex.Store({
       state.pageConfig[payload.key] = payload.value
     },
 
-
-
-
-
-
-
-
+    createNewAct(state){
+      state.myPageComps = [
+        clone(datas.headerBannerImg1),
+      ];
+      state.pageConfig = configInitData;
+      state.currentAct = null;
+    }
 
 
   },
