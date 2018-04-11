@@ -159,7 +159,6 @@ export default new Vuex.Store({
 
       } else { //插入到中间
         state.myPageComps.splice(state.selectedCompIndex, 0, selected);
-        updateForms(state,compName)
 
       }
 

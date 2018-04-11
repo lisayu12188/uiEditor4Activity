@@ -8,7 +8,7 @@ import store from './store'
 
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
-import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup,Table,TableColumn,Dialog,Message,MessageBox} from 'element-ui'
+import {Menu,Icon,Form,Popover,Container,Button,ButtonGroup, Select,Option,OptionGroup,Tooltip,Input,Upload,FormItem,InputNumber,ColorPicker,Radio,RadioGroup,RadioButton,Checkbox,CheckboxButton,CheckboxGroup,Table,TableColumn,Dialog,Message,MessageBox,Row} from 'element-ui'
 
 
 Vue.prototype.$ELEMENT = { size: 'small' }
@@ -40,6 +40,7 @@ Vue.use(OptionGroup);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Dialog);
+Vue.use(Row);
 // Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$message = Message;
 // Vue.prototype.$msgbox = MessageBox;

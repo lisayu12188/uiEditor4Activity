@@ -19,8 +19,8 @@ export const getCurrentAct = ({commit}) => {
 
 export const fetchHtml = ({commit}) => {
   let id = Utils.parseQuery(location.search).id;
-  console.log(file)
-  if(file === undefined || !id){
+  console.log(id)
+  if(id === undefined || !id){
     return false
   }
   id = Utils.parseTime(id)

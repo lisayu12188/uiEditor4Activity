@@ -2,7 +2,12 @@
 <div>
   <div class="top">
     <img src="../assets/img/header-logo.png" alt="" class="logo">
+
     <a>活动页面</a>
+
+    <el-button round type="success" icon="el-icon-circle-plus-outline"  size='small'>新建</el-button>
+
+
     <div class="user">
       <a>小鱼</a>
       <a>退出</a>
@@ -89,13 +94,31 @@
       <el-button-group>
         <el-button type="primary" icon="el-icon-refresh" @click='redoComp'>恢复</el-button>
         <el-button type="primary" icon="el-icon-remove" @click='undoComp'>撤销</el-button>
-        <el-button type="primary" icon="el-icon-upload" @click='save'>保存</el-button>
-          <a :href="previewUrl"><el-button type="primary" icon="el-icon-mobile-phone">
+        </el-button-group>
+
+        <el-button-group>
+        <el-button type="danger" icon="el-icon-upload" @click='save'>保存</el-button>
+
+
+          <a :href="previewUrl"><el-button type="success" icon="el-icon-mobile-phone">
         预览</el-button></a>
-        <!-- <router-link to="mypage"><el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button></router-link> -->
+
+        <el-button type="warning" icon="el-icon-sold-out" @click='exportHtml' size='small'>
+      导出</el-button>
+
+
+
         <!-- <el-button type="primary" icon="el-icon-mobile-phone" >预览</el-button> -->
         <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i>发布线上</el-button> -->
+
       </el-button-group>
+
+
+
+
+
+
+
 
 
       <div class="mobile-wrapper">
@@ -319,10 +342,16 @@ export default {
       })
     },
 
+    exportHtml(){
+       this.fetchHtml().then( data => {
+         if ('download' in document.createElement('a')) {
+          Utils.fileDownload(data.data, 'index.html');
+         } else {
+          alert('浏览器不支持');
+         }
+       });
 
-
-
-
+    }
 
   }
 
