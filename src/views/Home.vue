@@ -100,8 +100,7 @@
         <el-button type="danger" icon="el-icon-upload" @click='save'>保存</el-button>
 
 
-          <a :href="previewUrl"><el-button type="success" icon="el-icon-mobile-phone">
-        预览</el-button></a>
+
 
         <el-button type="warning" icon="el-icon-sold-out" @click='exportHtml' size='small'>
       导出</el-button>
@@ -112,6 +111,9 @@
         <!-- <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i>发布线上</el-button> -->
 
       </el-button-group>
+
+      <a :href="previewUrl"><el-button type="success" icon="el-icon-mobile-phone">
+    预览</el-button></a>
 
 
 
