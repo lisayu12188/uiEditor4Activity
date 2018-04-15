@@ -197,6 +197,7 @@ export default new Vuex.Store({
       ];
       state.pageConfig = configInitData;
       state.currentAct = null;
+      state.mymodule = 'pageSet';
     }
 
 

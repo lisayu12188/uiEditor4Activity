@@ -96,8 +96,7 @@ function renderToString(renderer, context) {
 
 
 app.use(bodyParser());
-app.use(serve('/dist', './dist', true))
-app.use(serve('/public', './public', true))
+app.use(serve(path.join(__dirname, 'dist')));
 app.use(cors({
     origin: function (ctx) {
         if (ctx.url === '/test') {

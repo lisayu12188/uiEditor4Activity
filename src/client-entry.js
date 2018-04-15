@@ -1,4 +1,4 @@
-import { createApp } from './main'
+import { createApp } from './server-main.js'
 
 const { app, router } = createApp()
 router.onReady(() => {
