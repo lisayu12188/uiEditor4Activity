@@ -22,8 +22,6 @@ a {
 
 html {
   font-size: 37.5px;
-  overflow: hidden;
-  height: 100%;
 }
 
 body {
@@ -31,8 +29,6 @@ body {
   background-color: #eceef3;
 }
 
-html,
-body,
 #app {
   height: 100vh;
   width: 100vw;
@@ -40,7 +36,7 @@ body,
 
 img {
   vertical-align: middle;
-}
+}np
 
 * {
   box-sizing: border-box;

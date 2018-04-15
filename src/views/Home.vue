@@ -404,7 +404,7 @@ export default {
 .navbar {
   background-color: #2a3542;
   width: 10%;
-  height: 100%;
+  height: 100vh;
   float: left;
   padding-top: 50px;
 }
