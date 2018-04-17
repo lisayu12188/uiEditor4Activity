@@ -18,7 +18,7 @@ function createRenderer (bundle, options) {
         bundle,
         Object.assign(options, {
             template,
-            cache: LRU({
+            cache: LRU({ //组件缓存
                 max: 1000,
                 maxAge: 1000 * 60 * 15
             }),
@@ -63,7 +63,6 @@ async function render(ctx) {
     content: fileData.pageConfig.shareContent,
     imageUrl:fileData.pageConfig.sharePic,
   }
-  console.log(shareConfig)
   const context = {
       title: fileData.pageConfig.actTitle,
       url: ctx.url,
@@ -80,7 +79,6 @@ async function render(ctx) {
           }
         `
   };
-  console.log(context);
   const html = await renderToString(renderer, context);
   ctx.body = html;
 }
