@@ -9,7 +9,7 @@
 import imgSrc from '../../assets/img/banner.jpg'
 import { mapState } from 'vuex'
 export default {
-  name: 'paragraph1',
+  name: 'paragraph2',
 
   data () {
     return {
@@ -50,7 +50,6 @@ font-size: 0.4800rem;
 color: #333333;
 line-height: 0.8533rem;
 padding: 0 0.3200rem;
-padding-bottom: .4267rem;
 }
 
 

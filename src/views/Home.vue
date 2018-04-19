@@ -31,6 +31,9 @@
       <li @click="showModule('picLink')" :class="{current:mymodule ==='picLink'}">图片链接</li>
       <li @click="showModule('picText')" :class="{current:mymodule ==='picText'}">图文</li>
       <li @click="showModule('productList')" :class="{current:mymodule ==='productList'}">产品列表</li>
+      <li @click="showModule('space')" :class="{current:mymodule ==='space'}">模块间距</li>
+
+
       <li>模板</li>
       <li>高级</li>
 
@@ -67,10 +70,15 @@
 
       </div>
       <div class="leftPanel" v-show="mymodule === 'paragraph'">
-        <div class="paragraph-comp-wrapper " @click="addComp('paragraph1')">
-          段落文字1
-          <img src="../assets/img/paragraph1.png" alt="" class="width750">
+        <div class="paragraph-comp-wrapper " @click="addComp('paragraph2')">
+          段落文字1 （无边距）
+          <img src="../assets/img/para2.png" alt="" class="width750">
         </div>
+        <div class="paragraph-comp-wrapper " @click="addComp('paragraph1')">
+          段落文字2 （下边距32px）
+          <img src="../assets/img/para1.png" alt="" class="width750">
+        </div>
+
       </div>
       <div class="leftPanel" v-show="mymodule === 'title'">
         <div class="paragraph-comp-wrapper " @click="addComp('picTitle')">
@@ -87,6 +95,12 @@
       <div class="leftPanel" v-show="mymodule === 'picText'">
         702px 图片：
           <img src="../assets/img/banner.jpg" alt="" class="width750" @click="addComp('img702')">
+      </div>
+
+      <div class="leftPanel" v-show="mymodule === 'space'">
+        模块间距：
+          <div @click="addComp('space')" class="width750">
+          </div>
       </div>
       <div class="leftPanel" v-show="mymodule === 'productList'">产品列表</div>
 
@@ -169,9 +183,11 @@ import headerBannerImg1 from '../components/header/headerBannerImg1'
 import whiteFooter from '../components/footer/blackFooter'
 import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
+import paragraph2 from '../components/paragraph/paragraph2'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
 import img702 from '../components/image/img702'
+import space from '../components/trims/space'
 
 
 
@@ -182,6 +198,7 @@ import inputForm from '../components/forms/inputForm'
 import textareaForm from '../components/forms/textarea'
 import uploadImg from '../components/forms/uploadImg'
 import backgroundColor from '../components/forms/backgroundColor'
+import height from '../components/forms/height'
 
 import * as Utils from '../utils'
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
@@ -239,18 +256,21 @@ export default {
     blackFooter,
     whiteFooter,
     paragraph1,
+    paragraph2,
     picTitle,
     title1,
 
     activities,
     img702,
+    space,
 
 
     // forms
     inputForm,
     textareaForm,
     uploadImg,
-    backgroundColor
+    backgroundColor,
+    height
     // fontSet,
     // commonForms
 
@@ -544,7 +564,9 @@ export default {
 .width750 {
   display: block;
   width: 80%;
+  min-height: 30px;
   margin: 0 auto 20px;
+  background-color: #fff;
 }
 
 .width750:hover {

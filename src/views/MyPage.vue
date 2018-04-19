@@ -15,9 +15,11 @@ import headerBannerImg1 from '../components/header/headerBannerImg1'
 import whiteFooter from '../components/footer/blackFooter'
 import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
+import paragraph2 from '../components/paragraph/paragraph2'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
 import img702 from '../components/image/img702'
+import space from '../components/trims/space'
 
 
 export default {
@@ -30,9 +32,11 @@ export default {
     blackFooter,
     whiteFooter,
     paragraph1,
+    paragraph2,
     picTitle,
     title1,
-    img702
+    img702,
+    space
   },
 
 

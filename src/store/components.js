@@ -60,6 +60,10 @@ const allComponents = [
     forms: ['textareaForm']
   },
   {
+    name: 'paragraph2',
+    forms: ['textareaForm']
+  },
+  {
     name: 'title1',
     forms: ['inputForm']
   },
@@ -73,22 +77,32 @@ const allComponents = [
     forms: ['uploadImg']
   },
 
-
+  {
+    name: 'space',
+    forms: ['height']
+  },
 ]
 
 // 组件对应的表单
 const components_forms = {
   headerBannerImg1:['uploadImg'],
   paragraph1:['textareaForm'],
+  paragraph2:['textareaForm'],
   picTitle:['uploadImg'],
   title1:['textareaForm'],
   blackFooter:['backgroundColor'],
   whiteFooter:['backgroundColor'],
-  img702:['uploadImg']
+  img702:['uploadImg'],
+  space:['height']
 }
+
+
+
+
+
 
 export default {
   allForms, //暂时没用
-  allComponents,
+  allComponents,//暂时没用
   components_forms
 }

@@ -4,8 +4,9 @@ import * as actions from './actions'
 import VuexUndoRedo from "vuex-undo-redo"
 
 import components from './components'
+import initData from './initData'
 
-import imgSrc from '../assets/img/pic-title.png'
+
 
 Vue.use(Vuex)
 // Vue.use(VuexUndoRedo)
@@ -13,54 +14,8 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 
-const datas = {
-  headerBannerImg1:{
-    name:'headerBannerImg1',
-    data:{
-      src:'http://static.qa.91jkys.com/activity/img/bf9452a366494c11b68007141019011d.jpg'
-    },
-  },
-  paragraph1:{
-    name:'paragraph1',
-    data:{
-      text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。'
-    },
-  },
-  picTitle:{
-    name:'picTitle',
-    data:{
-      src:imgSrc
-    },
-  },
-  title1: {
-    name:'title1',
-    data:{
-      text:'我是h2标题',
-      color:'#333'
-    },
-  },
-  blackFooter:{
-    name:'blackFooter',
-    data:{
-      backgroundColor:'transparent'
-    },
-  },
-  whiteFooter: {
-    name:'whiteFooter',
-    data:{
-      backgroundColor:'transparent'
-    },
-  },
-
-  img702:{
-    name:'img702',
-    data:{
-      src:'http://static.qa.91jkys.com/activity/img/bf9452a366494c11b68007141019011d.jpg'
-    },
-  },
 
 
-}
 
 
 // 拷贝
@@ -70,13 +25,11 @@ function clone(obj){
 let configInitData = {
   actCode:'',
   actTitle:'',
-
-    shareLink:'',
-    shareTitle:'',
-    shareContent:'',
-    shareDesc:'',
-    sharePic:''
-
+  shareLink:'',
+  shareTitle:'',
+  shareContent:'',
+  shareDesc:'',
+  sharePic:''
 }
 export default new Vuex.Store({
   actions,
@@ -91,11 +44,12 @@ export default new Vuex.Store({
     // allComponents: components.allComponents,
     // allForms: components.allForms,
     myPageComps:[
-      clone(datas.headerBannerImg1),
+      clone(initData.headerBannerImg1),
     ],
     pageConfig:{...configInitData},
     activities:[],
     currentAct:null
+
 
   },
 
@@ -148,7 +102,7 @@ export default new Vuex.Store({
     },
 
     addComp(state,compName) {
-      let selected = clone(datas[compName]);
+      let selected = clone(initData[compName]);
       const len = state.myPageComps.length;
       if (state.selectedCompIndex < 0 || state.selectedCompIndex === len - 1) { //添加到最后
         state.myPageComps.push(selected);
@@ -193,7 +147,7 @@ export default new Vuex.Store({
 
     createNewAct(state){
       state.myPageComps = [
-        clone(datas.headerBannerImg1),
+        clone(initData.headerBannerImg1),
       ];
       state.pageConfig = configInitData;
       state.currentAct = null;
