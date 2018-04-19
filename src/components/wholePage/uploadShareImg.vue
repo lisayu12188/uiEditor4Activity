@@ -2,7 +2,7 @@
   <div>
     <el-upload
       class="upload-demo"
-      action="http://api.qa.91jkys.com:8096"
+      action="http://api.91jkys.com:8096"
       :data="{action:'fileUpload'}"
       ref='imgList'
       :on-success='handleSuccess'
@@ -15,7 +15,7 @@
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
       <!-- <el-button size="small" type="primary">上传图片</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-      
+
 
 
     </el-upload>

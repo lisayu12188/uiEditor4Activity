@@ -37,6 +37,8 @@ const allForms = [
     }]
   },
 ]
+
+
 const allComponents = [
   {
     name: 'headerBannerImg1',
@@ -66,10 +68,27 @@ const allComponents = [
     forms: ['uploadImg']
   },
 
+  {
+    name: 'img702',
+    forms: ['uploadImg']
+  },
+
 
 ]
 
+// 组件对应的表单
+const components_forms = {
+  headerBannerImg1:['uploadImg'],
+  paragraph1:['textareaForm'],
+  picTitle:['uploadImg'],
+  title1:['textareaForm'],
+  blackFooter:['backgroundColor'],
+  whiteFooter:['backgroundColor'],
+  img702:['uploadImg']
+}
+
 export default {
-  allForms,
-  allComponents
+  allForms, //暂时没用
+  allComponents,
+  components_forms
 }

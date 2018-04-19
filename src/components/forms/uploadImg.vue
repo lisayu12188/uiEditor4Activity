@@ -4,7 +4,7 @@
     <el-upload
     drag
       class="upload-demo"
-      action="http://api.qa.91jkys.com:8096"
+      action="http://api.91jkys.com:8096"
       :data="{action:'fileUpload'}"
       ref='imgList'
 

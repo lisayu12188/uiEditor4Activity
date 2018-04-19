@@ -17,6 +17,7 @@ import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
+import img702 from '../components/image/img702'
 
 
 export default {
@@ -31,6 +32,7 @@ export default {
     paragraph1,
     picTitle,
     title1,
+    img702
   },
 
 

@@ -84,7 +84,10 @@
       </div>
       <div class="leftPanel" v-show="mymodule === 'workAdvice'">作品推荐</div>
       <div class="leftPanel" v-show="mymodule === 'picLink'">图片链接</div>
-      <div class="leftPanel" v-show="mymodule === 'picText'">图文</div>
+      <div class="leftPanel" v-show="mymodule === 'picText'">
+        702px 图片：
+          <img src="../assets/img/banner.jpg" alt="" class="width750" @click="addComp('img702')">
+      </div>
       <div class="leftPanel" v-show="mymodule === 'productList'">产品列表</div>
 
 
@@ -158,6 +161,7 @@
 </template>
 
 <script>
+//添加活动内容组件
 import activities from '../components/page/activities'
 import pageSet from '../components/wholePage/pageSet'
 import mybtns from '../components/mybtns'
@@ -167,7 +171,9 @@ import blackFooter from '../components/footer/whiteFooter'
 import paragraph1 from '../components/paragraph/paragraph1'
 import picTitle from '../components/title/picTitle'
 import title1 from '../components/title/title1'
-import * as Utils from '../utils'
+import img702 from '../components/image/img702'
+
+
 
 
 
@@ -176,19 +182,11 @@ import inputForm from '../components/forms/inputForm'
 import textareaForm from '../components/forms/textarea'
 import uploadImg from '../components/forms/uploadImg'
 import backgroundColor from '../components/forms/backgroundColor'
-// import fontSet from '../components/forms/fontSet'
-// import commonForms from '../components/forms/commonForms'
 
+import * as Utils from '../utils'
 import { mapState,mapGetters,mapMutations,mapActions } from 'vuex'
+import components from '../store/components'
 
-const allForms = {
-  headerBannerImg1:['uploadImg'],
-  paragraph1:['textareaForm'],
-  picTitle:['uploadImg'],
-  title1:['textareaForm'],
-  blackFooter:['backgroundColor'],
-  whiteFooter:['backgroundColor']
-}
 
 function parseQuery(qs) {
   qs = qs.replace(/^\?/, '');
@@ -216,8 +214,7 @@ export default {
     ...mapState([
     'mymodule',
     'selectedCompIndex',
-    'allComponents',
-    'allForms',
+    // 'allComponents',
     'myPageComps',
     'currentAct',
     'pageConfig'
@@ -226,7 +223,7 @@ export default {
 
   forms(){
      let name = this.myPageComps[this.selectedCompIndex] && this.myPageComps[this.selectedCompIndex]['name']
-     return allForms[name]
+     return components.components_forms[name]
   },
   previewUrl(){
     const id = Utils.parseTime(this.$route.query.id)
@@ -246,6 +243,7 @@ export default {
     title1,
 
     activities,
+    img702,
 
 
     // forms

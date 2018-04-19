@@ -19,22 +19,18 @@ const datas = {
     data:{
       src:'http://static.qa.91jkys.com/activity/img/bf9452a366494c11b68007141019011d.jpg'
     },
-    // forms:['uploadImg']
   },
   paragraph1:{
     name:'paragraph1',
     data:{
       text:'糖尿病是一种代谢紊乱综合征，除血糖高以外，往往还同时伴有血脂代谢异常等，共同构成了糖尿病慢性并发症的高危因素。'
     },
-
-    // forms:['textareaForm']
   },
   picTitle:{
     name:'picTitle',
     data:{
       src:imgSrc
     },
-    // forms:['uploadImg']
   },
   title1: {
     name:'title1',
@@ -42,21 +38,25 @@ const datas = {
       text:'我是h2标题',
       color:'#333'
     },
-    // forms:['textareaForm']
   },
   blackFooter:{
     name:'blackFooter',
     data:{
       backgroundColor:'transparent'
     },
-    // forms:['backgroundColor']
   },
   whiteFooter: {
     name:'whiteFooter',
     data:{
       backgroundColor:'transparent'
     },
-    // forms:['backgroundColor']
+  },
+
+  img702:{
+    name:'img702',
+    data:{
+      src:'http://static.qa.91jkys.com/activity/img/bf9452a366494c11b68007141019011d.jpg'
+    },
   },
 
 
@@ -88,8 +88,8 @@ export default new Vuex.Store({
   state:{
     mymodule: 'pageSet',
     selectedCompIndex: 0,
-    allComponents: components.allComponents,
-    allForms: components.allForms,
+    // allComponents: components.allComponents,
+    // allForms: components.allForms,
     myPageComps:[
       clone(datas.headerBannerImg1),
     ],
